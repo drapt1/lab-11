@@ -122,6 +122,7 @@ int main() {
                 cout << "Введите 1 элемент списка: " << endl;
                 cin >> d;
                 first_elem(&pbeg, &pend, d);
+                g = 1;
                 break;
             }
             else {
@@ -130,7 +131,6 @@ int main() {
                 add_elem(&pend, a);
                 break;
             }
-            g = 1;
         case '2':
             cout << "Введите значение элемента для удаления: " << endl;
             cin >> k;
