@@ -79,22 +79,9 @@ void del_list(Elem *pbeg) {
  
     }
 }
-void del(Elem* *pbeg, Elem* *pend, unsigned const n)
-{
-    Elem** tmp = pbeg;
-    Elem* prev = nullptr;
-    for (int rem = Elem::siz; rem > n; --rem)
-    {
-        prev = *tmp;
-        tmp = &(*tmp)->pnext;
-    }
-    del_list(*tmp);
-    *pend = prev;
-    *tmp = nullptr;
-}
+
 void print_elem(Elem *pbeg) {
     Elem* ph = pbeg;
-    cout << "siz: " << Elem::siz << '\n';
     while (ph) {
         cout << ph->key << ' ';
         ph = ph->pnext;
@@ -114,7 +101,7 @@ int main() {
     bool exit = false;
     do {
         system("cls");
-        cout << "1 - добавить элемент/создать\n2 - удалить один\n3 - удалить несколько\n4 - просмотр\n5 - выход" << endl;
+        cout << "1 - добавить элемент/создать\n2 - удалить один\n3 - просмотр\n4 - выход" << endl;
         cin >> ch;
         switch (ch) {
         case '1':
@@ -138,12 +125,8 @@ int main() {
                 cout << "Элемент для удаления не найден" << endl;
             }
             break;
+
         case '3':
-            cout << "Сколько хотите удалить элементов с конца: " << endl;
-            cin >> z;
-            del(&pbeg, &pend, z);
-            break;
-        case '4':
             if (g == 1) {
                 cout << "Список всех элементов" << endl;
                 print_elem(pbeg);
@@ -151,7 +134,7 @@ int main() {
             else
                 cout << "Список пуст" << endl;
             break;
-        case '5':
+        case '4':
             exit = true;
             break;
         }
