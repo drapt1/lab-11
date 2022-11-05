@@ -22,16 +22,39 @@ int first_elem(Elem* *pbeg, Elem* *pend, int d) {
  
     return 0;
 }
-int add_elem(Elem* *pend, int d) {
+int add_elem(Elem** pend, int d) {
     Elem* ph = new Elem;
     ph->key = d;
     ph->pnext = 0;
     (*pend)->pnext = ph;
     *pend = ph;
     ++Elem::siz;
- 
+
     return 0;
 }
+    int del_elem (Elem * pbeg, int k) {
+        int n;
+        cout << "Введите ключ нового элемента списка: "; cin >> n;
+
+        while (pbeg) {
+            if (pbeg->key == k) {
+                Elem* ph = new Elem;
+
+                ph->pnext = pbeg->pnext;
+                ph->key = pbeg->key;
+
+                pbeg->pnext = ph;
+                pbeg->key = n;
+
+                break;
+            }
+
+            pbeg = pbeg->pnext;
+        }
+
+        return 1;
+    }
+
 int del_elem(Elem* *pbeg, Elem* *pend, int k) {
     Elem* tmp = *pbeg;
     if (!*pbeg) {
@@ -109,25 +132,40 @@ int main() {
                 cout << "Введите 1 элемент списка: " << endl;
                 cin >> d;
                 first_elem(&pbeg, &pend, d);
-                g = 1;
+                g++;
+                print_elem(pbeg);
                 break;
             }
             else {
                 cout << "Введите новый элемент списка: " << endl;
                 cin >> a;
                 add_elem(&pend, a);
+                print_elem(pbeg);
                 break;
             }
         case '2':
             cout << "Введите значение элемента для удаления: " << endl;
             cin >> k;
-            if (del_elem(&pbeg, &pend, k) == 0) {
+            if (del_elem (pbeg, k) == 0) {
                 cout << "Элемент для удаления не найден" << endl;
             }
+            else {
+             
+                        if (del_elem(&pbeg, &pend, k) == 0) {
+                            cout << "Элемент для удаления не найден" << endl;
+                        }
+                        if (g > 0) {
+                            cout << "Список всех элементов" << endl;
+                            print_elem(pbeg);
+                    }
+                    else
+                        cout << "Список пуст" << endl;
+                    break;
+                 }
             break;
 
         case '3':
-            if (g == 1) {
+            if (g> 0) {
                 cout << "Список всех элементов" << endl;
                 print_elem(pbeg);
             }
